@@ -1,24 +1,26 @@
+//main.cpp. This file is currently the testing base for project4.
+
 #include "myutil.h"
-#include "student.h"
-#include "table.h"
+#include "site.h"
+#include "tree.h"
 
 
 
 int main(int argc, char ** argv)
 {
-	Table cs260;
-	Student match;
-	Student matchList[10];
+	Tree cs260;
+	Site match;
+	Site matchList[10];
 	int size = 0;
-	cs260.add(new Student("joyce", 3.9));
-	cs260.add(new Student("aaron", 3.7));
-	cs260.add(new Student("wendy", 2.9));
-	cs260.add(new Student("anna", 3.0));
-	cs260.add(new Student("eric", 3.8));
-	cs260.add(new Student("zack", 3.3));
-	cs260.add(new Student("larry", 3.3));
-	cs260.add(new Student("karan", 3.3));
-	cs260.add(new Student("kim", 3.3));
+/*	cs260.add(new site("joyce", 3.9));
+	cs260.add(new site("aaron", 3.7));
+	cs260.add(new site("wendy", 2.9));
+	cs260.add(new site("anna", 3.0));
+	cs260.add(new site("eric", 3.8));
+	cs260.add(new site("zack", 3.3));
+	cs260.add(new site("larry", 3.3));
+	cs260.add(new site("karan", 3.3));
+	cs260.add(new site("kim", 3.3));
 	cs260.display();
 	cout << "Tree size: " << cs260.getSize() << endl;
 	if (cs260.search("anna", match))
@@ -26,7 +28,7 @@ int main(int argc, char ** argv)
 		cout << "Finding match for anna: " << match << endl;
 	}
 	cs260.searchByGpa(3.5, matchList, size);
-	cout << "Matching students for gpa > 3.5: " << endl;
+	cout << "Matching sites for gpa > 3.5: " << endl;
 	for (int i = 0; i < size; i++)
 	{
 		cout << matchList[i] << endl;
@@ -56,6 +58,6 @@ int main(int argc, char ** argv)
 	cout << "After removing joyce ..." << endl;
 	cs260.display();
 	system("pause");
-	return 0;
+*/	return 0;
 }
 

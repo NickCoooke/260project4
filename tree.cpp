@@ -21,13 +21,13 @@ void Tree::destroy(Node *& currRoot)
 }
 
 //Public call to insert element into ADT
-void Tree::add(site * s)
+void Tree::add(Site * s)
 {
 	add(root, s);
 	size++;
 }
 //Insert element into tree ADT
-void Tree::add(Node *& currRoot, site * s)
+void Tree::add(Node *& currRoot, Site * s)
 {
 	if (!currRoot)
 	{
@@ -43,15 +43,15 @@ void Tree::add(Node *& currRoot, site * s)
 	}
 }
 
+//display entire tree contents
 void Tree::display() const
 {
 
 	cout << "In-order: " << endl;
 	displayInOrder(root);
 
-
 }
-
+//recursive helper to display tree contents
 void Tree::displayInOrder(Node * root) const
 {
 	if (root)
@@ -61,7 +61,8 @@ void Tree::displayInOrder(Node * root) const
 		displayInOrder(root->right);
 	}
 }
-
+//display unordered tree
+//DELETE?
 void Tree::displayPreOrder(Node * root) const
 {
 	if (root)
@@ -71,7 +72,7 @@ void Tree::displayPreOrder(Node * root) const
 		displayPreOrder(root->right);
 	}
 }
-
+//DELETE?
 void Tree::displayPostOrder(Node * root) const
 {
 	if (root)
@@ -82,11 +83,12 @@ void Tree::displayPostOrder(Node * root) const
 	}
 }
 
+//return total number of elements in tree
 int Tree::getSize() const
 {
 	return getSize(root);
 }
-
+//helper function to calculate nodes in tree
 int Tree::getSize(Node * currRoot) const
 {
 
@@ -98,19 +100,20 @@ int Tree::getSize(Node * currRoot) const
 	
 }
 
-bool Tree::search(const char * key, site& match) const
+//public function which searches tree with a key and sets Site& to match
+bool Tree::search(const char * key, Site& match) const
 {
 	return search(root, key, match);
 }
-
-bool Tree::search(Node * currRoot, const char * key, site& match) const
+//private helper function for search
+bool Tree::search(Node * currRoot, const char * key, Site& match) const
 {
 	if (!currRoot)
 	{
 		return false;
 	}
 
-	int temp = strcmp(key, currRoot->data->getName());
+	int temp = strcmp(key, currRoot->data->getTopic());
 	if (temp == 0)
 	{
 		match = *(currRoot->data);
@@ -125,36 +128,38 @@ bool Tree::search(Node * currRoot, const char * key, site& match) const
 		return search(currRoot->right, key, match);
 	}
 }
-void Tree::searchByGpa(float gpa, site matches[], int& size) const
+
+void Tree::searchByTopic(const char* topic, Site matches[], int& size) const
 {
-	searchByGpa(root, gpa, matches, size);
+	searchByTopic(root, topic, matches, size);
 }
 
-void Tree::searchByGpa(Node * currRoot, float gpa, site matches[], int& size) const
+void Tree::searchByGpa(Node * currRoot, const char* topic,
+                       Site matches[], int& size) const
 {
 	if (currRoot)
 	{
-		if (gpa <= currRoot->data->getGpa())
+		if (topic <= currRoot->data->getTopic())
 		{
 			matches[size] = *(currRoot->data);
 			size++;
 		}
 
-		searchByGpa(currRoot->left, gpa, matches, size);
-		searchByGpa(currRoot->right, gpa, matches, size);
+		searchByTopic(currRoot->left,  topic, matches, size);
+		searchByTopic(currRoot->right, topic, matches, size);
 	}
 }
 
-bool Tree::remove(const char * key, site& objectRemoved)
+bool Tree::remove(const char * key, Site& objectRemoved)
 {
 	return remove(root, key, objectRemoved);
 }
 
-bool Tree::remove(Node *& currRoot, const char * key, site& objectRemoved)
+bool Tree::remove(Node *& currRoot, const char * key, Site& objectRemoved)
 {
 	if (!currRoot)
 		return false;
-	int temp = strcmp(key, currRoot->data->getName());
+	int temp = strcmp(key, currRoot->data->getTopic());
 	if (temp == 0)
 	{
 		objectRemoved = *(currRoot->data);

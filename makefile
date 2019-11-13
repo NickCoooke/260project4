@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-Wall -Wextra -g -c -std=c++11
 LDFLAGS=
-SOURCES=main.cpp table.cpp site.cpp  
+SOURCES=main.cpp tree.cpp site.cpp  
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=proj3
 

@@ -1,18 +1,18 @@
 #ifndef TREE_H
 #define TREE_H
 #include "site.h"
-class tree
+class Tree
 {
 public:
-	tree();
-	~tree();
+	Tree();
+	~Tree();
 	void add(Site * s);
 	
 	void display() const;
 	//int search(const char * key, Site matches[]) const;
 	bool remove(const char * key, Site& objectRemoved);
 	bool search(const char * key, Site& match) const;
-	void searchByGpa(float gpa, Site matches[], int& size) const;
+	void searchByTopic(float gpa, Site matches[], int& size) const;
 	int getSize() const;
 private:	
 	struct Node
@@ -35,7 +35,7 @@ private:
 	void destroy(Node *& currRoot);
 	int getSize(Node * currRoot) const;
 	bool search(Node * currRoot, const char * key, Site& match) const;
-	void searchByGpa(Node * currRoot, float gpa, Site matches[], int& size) const;
+	void searchByTopic(Node * currRoot, float gpa, Site matches[], int& size) const;
 	bool remove(Node *& currRoot, const char * key, Site& objectRemoved);
 	void deleteNode(Node *& aNode);
 
