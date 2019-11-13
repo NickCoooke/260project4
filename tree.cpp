@@ -57,7 +57,7 @@ void Tree::displayInOrder(Node * root) const
 	if (root)
 	{
 		displayInOrder(root->left);
-		cout << *(root->data) << endl;
+		cout << root->data << endl;
 		displayInOrder(root->right);
 	}
 }
@@ -67,7 +67,7 @@ void Tree::displayPreOrder(Node * root) const
 {
 	if (root)
 	{
-		cout << *(root->data) << endl;
+		cout << root->data << endl;
 		displayPreOrder(root->left);		
 		displayPreOrder(root->right);
 	}
@@ -79,7 +79,7 @@ void Tree::displayPostOrder(Node * root) const
 	{
 		displayPostOrder(root->left);		
 		displayPostOrder(root->right);
-		cout << *(root->data) << endl;
+		cout << root->data << endl;
 	}
 }
 
@@ -134,7 +134,7 @@ void Tree::searchByTopic(const char* topic, Site matches[], int& size) const
 	searchByTopic(root, topic, matches, size);
 }
 
-void Tree::searchByGpa(Node * currRoot, const char* topic,
+void Tree::searchByTopic(Node * currRoot, const char* topic,
                        Site matches[], int& size) const
 {
 	if (currRoot)

@@ -137,10 +137,12 @@ void Site::setReview(const char* review)
 ostream& operator<<(ostream& out, const Site* S) 
 {   
     
-    out << "Topic:    \t"     << S->topic  << "\nAddress:\t" << S->addy
-        << "\nSummary:\t"     << S->sum    << "\nReview: \t" << S->review
+    out << "Topic:    \t" << S->getTopic()  
+        << "\nAddress:\t" << S->getAddy()
+        << "\nSummary:\t" << S->getSum()
+        << "\nReview: \t" << S->getReview()
         << "\nRating(0-5):\t";
-    for(int i = 0; i < S->rating; i++) 
+    for(int i = 0; i < S->getRating(); i++) 
         out << "*";
     out << endl;
     
@@ -157,8 +159,8 @@ const Site& Site::operator=(const Site& s)
      return *this;
  }
 */
- bool Site::operator< (const Site& s) const
+ bool Site::operator<(const Site& s) const
  {
-     return strcmp(this->topic, s.topic) < 0;
+     return strcmp(this->topic, s.getTopic()) < 0;
  }
 

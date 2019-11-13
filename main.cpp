@@ -6,12 +6,12 @@
 
 
 
-int main(int argc, char ** argv)
+int main()
 {
 	Tree cs260;
 	Site match;
 	Site matchList[10];
-	int size = 0;
+//	int size = 0;
 /*	cs260.add(new site("joyce", 3.9));
 	cs260.add(new site("aaron", 3.7));
 	cs260.add(new site("wendy", 2.9));

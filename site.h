@@ -22,7 +22,7 @@ public:
 	void    setRating(const int rating);
     void    setReview(const char* review);
     friend	ostream& operator<<(ostream& out, const Site* S); 
-    bool    Site::operator< (const Site& s) const;
+    bool    operator< (const Site& s) const;
 private:
     char*   topic;
 	char*	addy;
