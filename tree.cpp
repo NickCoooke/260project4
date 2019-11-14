@@ -128,7 +128,7 @@ bool Tree::search(Node * currRoot, const char * key, Site& match) const
 		return search(currRoot->right, key, match);
 	}
 }
-
+//Public call to search tree for topic matches, popopulate array matches, set size
 void Tree::searchByTopic(const char* topic, Site matches[], int& size) const
 {
 	searchByTopic(root, topic, matches, size);

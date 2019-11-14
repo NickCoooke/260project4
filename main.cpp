@@ -8,11 +8,23 @@
 
 int main()
 {
-	Tree cs260;
+    /*Leave off notes.
+     * 1. build file initilization program
+     * 2. update init file to contian realistic websites
+     * 3. ask about the key and plan out what she wants
+     * 4. build ui
+     *
+     *
+     */ 
+	Tree t;
 	Site match;
 	Site matchList[10];
-//	int size = 0;
-/*	cs260.add(new site("joyce", 3.9));
+	int size = 0;
+    t.add(new Site("fun", "https://www.youtube.com/watch?v=9zO_mlzufPk", "Study music", "upbeat chill jazzy", 4));
+    t.display();
+    /*Old code. Inputs no longer valid
+    
+    cs260.add(new site("joyce", 3.9));
 	cs260.add(new site("aaron", 3.7));
 	cs260.add(new site("wendy", 2.9));
 	cs260.add(new site("anna", 3.0));
@@ -58,6 +70,5 @@ int main()
 	cout << "After removing joyce ..." << endl;
 	cs260.display();
 	system("pause");
-*/	return 0;
-}
+*/}
 

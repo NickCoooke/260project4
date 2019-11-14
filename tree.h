@@ -12,7 +12,7 @@ public:
 	//int search(const char * key, Site matches[]) const;
 	bool remove(const char * key, Site& objectRemoved);
 	bool search(const char * key, Site& match) const;
-	void searchByTopic(float gpa, Site matches[], int& size) const;
+	void searchByTopic(const char* topic, Site matches[], int& size) const;
 	int getSize() const;
 private:	
 	struct Node
@@ -35,7 +35,7 @@ private:
 	void destroy(Node *& currRoot);
 	int getSize(Node * currRoot) const;
 	bool search(Node * currRoot, const char * key, Site& match) const;
-	void searchByTopic(Node * currRoot, float gpa, Site matches[], int& size) const;
+	void searchByTopic(Node * currRoot, const char* topic, Site matches[], int& size) const;
 	bool remove(Node *& currRoot, const char * key, Site& objectRemoved);
 	void deleteNode(Node *& aNode);
 

@@ -3,7 +3,7 @@ CFLAGS=-Wall -Wextra -g -c -std=c++11
 LDFLAGS=
 SOURCES=main.cpp tree.cpp site.cpp  
 OBJECTS=$(SOURCES:.cpp=.o)
-EXECUTABLE=proj3
+EXECUTABLE=a
 
 all: $(SOURCES) $(EXECUTABLE)
 
