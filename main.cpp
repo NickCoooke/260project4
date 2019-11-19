@@ -17,7 +17,7 @@ int main()
      *
      *
      */ 
-	Tree t;
+	Tree t("init.txt");
 	int size = 0;
     t.add(new Site("fun", "https://www.youtube.com/watch?v=9zO_mlzufPk",
                    "Study music", "upbeat chill jazzy", 4));

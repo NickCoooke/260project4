@@ -6,7 +6,7 @@
 
 #include "tree.h"
 #include "myutil.h"
-
+#include <fstream>
 
 
 //defualt constructor
@@ -34,9 +34,41 @@ Tree::~Tree()
 
 
 //private member function that loads data from a file into tree
-bool Tree::readfile(const char* in)
+bool Tree::readfile(const char* input_file)
 {
-    
+    {
+        ifstream in;
+        in.open(input_file);
+        if (!in)
+            return false; // checks if file is open.
+
+        //now we read into our class....
+        char topic[MAX_CHAR];
+        char addy[MAX_CHAR];
+        char sum[MAX_CHAR];
+        char review[MAX_CHAR];
+        int rating;
+        in.get(topic, MAX_CHAR, ';');
+        while (!in.eof()) {
+            in.get();
+
+            in.get(addy, MAX_CHAR, ';');
+            in.get();
+            in.get(sum, MAX_CHAR, ';');
+            in.get();
+            in.get(review, MAX_CHAR, ';');
+            in.get();
+            in >> rating;
+
+            in.ignore(MAX_CHAR, '\n'); //moves to new line
+            
+            add(new Site(topic, addy, sum, review, rating));
+            in.get(topic, MAX_CHAR, ';');
+        }
+        in.close();
+        return true;
+    }
+
 
 }
 
