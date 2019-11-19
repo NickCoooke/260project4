@@ -4,20 +4,21 @@
 class Tree
 {
 public:
-	Tree();
-	~Tree();
-	void add(Site * s);
-	
-	void display() const;
-	//int search(const char * key, Site matches[]) const;
-	bool remove(const char * key, Site& objectRemoved);
-	bool search(const char * key, Site& match) const;
-	void searchByTopic(const char* topic, Site matches[], int& size) const;
-	int getSize() const;
-private:	
-	struct Node
-	{
-		Node(Site * aSite)
+	Tree(); 
+        Tree(const char* input_file);
+        ~Tree();
+        void add(Site * s);
+        
+        void display() const;
+        //int search(const char * key, Site matches[]) const;
+        bool remove(const char * key, Site& objectRemoved);
+        bool search(const char * key, Site& match) const;
+        void searchByTopic(const char* topic, Site matches[], int& size) const;
+        int getSize() const;
+    private:	
+        struct Node
+        {
+            Node(Site * aSite)
 		{
 			data = aSite;
 			left = right = nullptr;

@@ -9,6 +9,7 @@
 int main()
 {
     /*Leave off notes.
+     * 0. modify key function so it strcat(topic, url);
      * 1. build file initilization program
      * 2. update init file to contian realistic websites
      * 3. ask about the key and plan out what she wants
@@ -17,24 +18,15 @@ int main()
      *
      */ 
 	Tree t;
-	Site match;
-	Site matchList[10];
 	int size = 0;
-    t.add(new Site("fun", "https://www.youtube.com/watch?v=9zO_mlzufPk", "Study music", "upbeat chill jazzy", 4));
+    t.add(new Site("fun", "https://www.youtube.com/watch?v=9zO_mlzufPk",
+                   "Study music", "upbeat chill jazzy", 4));
     t.display();
+    
+	cout << "Tree size: " << t.getSize() << endl;
+
     /*Old code. Inputs no longer valid
     
-    cs260.add(new site("joyce", 3.9));
-	cs260.add(new site("aaron", 3.7));
-	cs260.add(new site("wendy", 2.9));
-	cs260.add(new site("anna", 3.0));
-	cs260.add(new site("eric", 3.8));
-	cs260.add(new site("zack", 3.3));
-	cs260.add(new site("larry", 3.3));
-	cs260.add(new site("karan", 3.3));
-	cs260.add(new site("kim", 3.3));
-	cs260.display();
-	cout << "Tree size: " << cs260.getSize() << endl;
 	if (cs260.search("anna", match))
 	{
 		cout << "Finding match for anna: " << match << endl;
