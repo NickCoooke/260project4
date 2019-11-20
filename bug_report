@@ -1,6 +1,11 @@
 This is a commit specific bug report and design decision writeup
 
-
+Leave off note:
+1) work on restructuring bst. This needs to be called after insertions and deletions.
+    -find an algorithm for the restructure process!!!! save yourself time
+2) how are we going to intigrate the key into upper level functions?? asking the user
+    for a url is crazy talk... search by topic and then search individual?
+3) UI isnt started.
 
 
 Design Decisions. 

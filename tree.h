@@ -45,8 +45,6 @@ class Tree
     
         //Display functions. Need soring 
         void displayInOrder(Node * currRoot) const;
-        void displayPreOrder(Node * currRoot) const;
-        void displayPostOrder(Node * currRoot) const;
         
         
         void deleteNode(Node *& aNode);
@@ -55,7 +53,10 @@ class Tree
         bool search(Node * currRoot, const char * key, Site& match) const;
         void searchByTopic(Node * currRoot, const char* topic, Site matches[], int& size) const;
         bool remove(Node *& currRoot, const char * key, Site& objectRemoved);
-
+        
+        //int heightComp() const; //0 = even, -1 = left is longer, 1 = right is longer
+        //void format();          // checks to see if bst is well formatted. If not it fixes that
+        //void swap(Node* a, Node* b);            //swap's a and b's positions
         Node *	root;
         int		size;
 

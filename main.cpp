@@ -9,13 +9,15 @@
 int main()
 {
     /*Leave off notes.
-     * 0. add key to site and all site related things.
-     *      -need to finish Site::keyGen. 
-     *          -if key exists delete and replace 
-     *          -else create and replace 
-     * 2. update init file to contian realistic websites
-     * 3. ask about the key and plan out what she wants
-     * 4. build ui
+     * DONE 0. add key to site and all site related things.
+     * DONE 2. update init file to contian realistic websites
+     * DONE 3. ask about the key and plan out what she wants
+     * 4. intigrate key into remove and search functions
+     *         -how will higher up functions know what the key is?
+     *              -just use address as the key?
+     *
+     * 5. Build tree reformatting function
+     * 5. build ui
      *
      *
      */ 
@@ -30,7 +32,9 @@ int main()
     t.display();
     
 	cout << "Tree size: " << t.getSize() << endl;
-
+    
+    Site s;
+    t.remove(
     /*Old code. Inputs no longer valid
     
 	if (cs260.search("anna", match))

@@ -147,34 +147,6 @@ void Tree::displayInOrder(Node * root) const
 
 
 
-//display unordered tree
-//DELETE?
-void Tree::displayPreOrder(Node * root) const
-{
-	if (root)
-	{
-		cout << root->data << endl;
-		displayPreOrder(root->left);		
-		displayPreOrder(root->right);
-	}
-}
-
-
-
-//DELETE?
-void Tree::displayPostOrder(Node * root) const
-{
-	if (root)
-	{
-		displayPostOrder(root->left);		
-		displayPostOrder(root->right);
-		cout << root->data << endl;
-	}
-}
-
-
-
-
 //return total number of elements in tree
 int Tree::getSize() const
 {
