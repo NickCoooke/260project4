@@ -9,8 +9,10 @@
 int main()
 {
     /*Leave off notes.
-     * 0. modify key function so it strcat(topic, url);
-     * 1. build file initilization program
+     * 0. add key to site and all site related things.
+     *      -need to finish Site::keyGen. 
+     *          -if key exists delete and replace 
+     *          -else create and replace 
      * 2. update init file to contian realistic websites
      * 3. ask about the key and plan out what she wants
      * 4. build ui
@@ -20,6 +22,10 @@ int main()
 	Tree t("init.txt");
 	int size = 0;
     t.add(new Site("fun", "https://www.youtube.com/watch?v=9zO_mlzufPk",
+                   "Study music", "upbeat chill jazzy", 4));
+    t.add(new Site("education", "https://www.youtube.com/watch?v=9zO_mlzufPk",
+                   "Study music", "upbeat chill jazzy", 4));
+    t.add(new Site("relax", "https://www.youtube.com/watch?v=9zO_mlzufPk",
                    "Study music", "upbeat chill jazzy", 4));
     t.display();
     

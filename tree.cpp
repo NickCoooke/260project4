@@ -16,7 +16,7 @@ Tree::Tree() : root(nullptr), size(0)
 
 
 //constructs tree with data from input file
-Tree::Tree(const char* input_file) 
+Tree::Tree(const char* input_file) : root(nullptr), size(0)
 {
     if(!readfile(input_file))
     {
@@ -37,12 +37,14 @@ Tree::~Tree()
 bool Tree::readfile(const char* input_file)
 {
     {
+
         ifstream in;
         in.open(input_file);
         if (!in)
             return false; // checks if file is open.
 
         //now we read into our class....
+        Site* ptr;
         char topic[MAX_CHAR];
         char addy[MAX_CHAR];
         char sum[MAX_CHAR];
@@ -62,7 +64,8 @@ bool Tree::readfile(const char* input_file)
 
             in.ignore(MAX_CHAR, '\n'); //moves to new line
             
-            add(new Site(topic, addy, sum, review, rating));
+            Site* ptr = new Site(topic, addy, sum, review, rating);
+            add(ptr);
             in.get(topic, MAX_CHAR, ';');
         }
         in.close();
@@ -112,9 +115,15 @@ void Tree::add(Node *& currRoot, Site * s)
 		add(currRoot->right, s);
 	}
 }
-
-
-
+/*
+char* Tree::keyGen(const Site* s) const
+{
+    //check if s exists?
+    char* ret[MAX_CHAR] = s->getTopic();
+    strcat(ret, s->getAddy());
+    return ret;
+}
+*/
 
 //display entire tree contents
 void Tree::display() const

@@ -1,0 +1,14 @@
+This is a commit specific bug report and design decision writeup
+
+
+
+
+Design Decisions. 
+1) creating the key. THe key needed to be a unique value for each 
+    Site. IN the prompt it asked for the searchable information from
+    a website url, but upon further inspection I found that domains
+    use various methods of storing that searchable data 
+    (youtube just encrpyts it). 
+        - key = topic + url --> this makes it unique for each element
+                                and sorts tree by topic
+

@@ -35,18 +35,26 @@ class Tree
             Node * right;
         };
 
+        //constructor/ destructor helper functions
+        void destroy(Node *& currRoot);
         bool readfile(const char* input_file);
+        
+        //add helper functions
+        void keyGen(const Site* s) const;
         void add(Node *& currRoot, Site * s);
-
+    
+        //Display functions. Need soring 
         void displayInOrder(Node * currRoot) const;
         void displayPreOrder(Node * currRoot) const;
         void displayPostOrder(Node * currRoot) const;
-        void destroy(Node *& currRoot);
+        
+        
+        void deleteNode(Node *& aNode);
+        //
         int getSize(Node * currRoot) const;
         bool search(Node * currRoot, const char * key, Site& match) const;
         void searchByTopic(Node * currRoot, const char* topic, Site matches[], int& size) const;
         bool remove(Node *& currRoot, const char * key, Site& objectRemoved);
-        void deleteNode(Node *& aNode);
 
         Node *	root;
         int		size;

@@ -36,6 +36,10 @@ void Site::init(const char* topic, const char* addy, const char* sum, const char
 	strcpy(this->review, review);
 	
     this->rating = rating;
+    
+    key = nullptr; 
+    
+    keyGen();     
 }
 
 //handles sites deletion and mannages allocated data
@@ -55,68 +59,79 @@ Site::~Site()
 	if (this->sum) {
 		delete[] sum;
 	}
-
 	sum = nullptr;
-	if (this->review) {
+	
+    if (this->review) {
 		delete[] review;
 	}
 	review = nullptr;
-}
-/*
-char* Site::getKey() const{
-    //isolate where the key is in the url and return string to such
-        //everything after third '/' if exists.
-        //else if everyhing after '://' and before '.'
-     
-     *iterate through addy until 3rd '/' is found
-     *  copy contensts after into new cstring ret [strlen(addy)]
-     *  return ret
-     *else if 
-     *  iterate through string until '://' is found
-     *  copy until '.' is hit >cin.getline(ret, MAX_CHAR, '.');
-     *  return ret
-     *
-    int size = strlen(addy);
-    int count = 0;
-    char c;
-    for (int i = 0; i < size -1; i++)
-    {   //count '/'
-        c = addy[i];
-        if (c == '/');
-        count++;
-        if (count == 3) 
-        {//set ret to remaining 
 
-        }
-    }//_for
-    if (count >= 3) 
-        count = 0;
-        while (count != 3)
-
-    }
+     if (this->key) {
+		delete[] key;
+	}
+	key = nullptr;
 }
-*/
+
+
+
 //return a copy of this->topic
 char * Site::getTopic() const{
 	return this->topic;
 }
+
+
+
 //return a copy of this->addy 
 char * Site::getAddy() const{
 	return this->addy;
 }
+
+
 
 //return a copy of this->sum 
 char* Site::getSum() const {
 	return this->sum;	
 }
 
+
+
 //return a copy of this->review 
 char* Site::getReview() const {
 	return this->review;	
 }
+
+
+
 //return a copy of this->rating 
 int Site::getRating() const {
 	return rating;
+}
+
+
+
+//Returns a copy of this->key
+char* Site::getKey() const {
+    return key; 
+}
+
+//Private key generator. 
+void Site::keyGen()
+{
+    //generate key
+    char* ret = new char[MAX_CHAR];
+    strcpy(ret, this->getTopic());
+    strcat(ret, this->getAddy());
+    if(key)
+    {
+        //Key exists
+        delete[] key;
+	    this->key = new char[strlen(ret) + 1];
+    	strcpy(key, ret);
+    }
+    else
+        key = ret;
+        
+
 }
 
 
@@ -125,6 +140,8 @@ void Site::setRating(const int rating) {
 	this->rating = rating;
 }
 
+
+
 //change this->review to input review
 void Site::setReview(const char* review) 
 {
@@ -132,6 +149,8 @@ void Site::setReview(const char* review)
 	this->review = new char[strlen(review) + 1];
 	strcpy(this->review, review);
 }
+
+
 
 //format Site S data and retrun ostream obj 
 ostream& operator<<(ostream& out, const Site* S) 
@@ -147,7 +166,9 @@ ostream& operator<<(ostream& out, const Site* S)
     out << endl;
     
     return out;
- }
+}
+
+
 /*
 const Site& Site::operator=(const Site& s)
  { INCOMPLETE!!!
@@ -159,8 +180,9 @@ const Site& Site::operator=(const Site& s)
      return *this;
  }
 */
+
  bool Site::operator<(const Site& s) const
  {
-     return strcmp(this->topic, s.getTopic()) < 0;
+     return strcmp(this->getKey(), s.getKey()) < 0;
  }
 
