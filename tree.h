@@ -29,10 +29,12 @@ class Tree
             {
                 data = aSite;
                 left = right = nullptr;
+                balance = 0;
             }
             Site * data;
             Node * left;
             Node * right;
+            int balance;
         };
 
         //constructor/ destructor helper functions
@@ -54,9 +56,13 @@ class Tree
         void searchByTopic(Node * currRoot, const char* topic, Site matches[], int& size) const;
         bool remove(Node *& currRoot, const char * key, Site& objectRemoved);
         
-        //int heightComp() const; //0 = even, -1 = left is longer, 1 = right is longer
-        //void format();          // checks to see if bst is well formatted. If not it fixes that
-        //void swap(Node* a, Node* b);            //swap's a and b's positions
+        int heightComp() const; 
+                //0 = even, -1 = left is longer, 1 = right is longer
+        int height(Node* root) const;
+        //void format();
+                // checks to see if bst is well formatted. If not it fixes that
+        //void swap(Node* a, Node* b); 
+                //swap's a and b's positions
         Node *	root;
         int		size;
 

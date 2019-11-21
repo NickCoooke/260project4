@@ -103,27 +103,43 @@ void Tree::add(Site * s)
 void Tree::add(Node *& currRoot, Site * s)
 {
 	if (!currRoot)
-	{
+	{   //adding leaf
 		currRoot = new Node(s);
+        currRoot->balance = 0;
 	}
 	else if (*s < *(currRoot->data))
 	{
 		add(currRoot->left, s);
+        currRoot->balance--;
 	}
 	else
 	{
 		add(currRoot->right, s);
+        currRoot->balance++;
 	}
+
+    //Keeping tree balanced
+    if(currRoot->balance > 1)
+    {
+        format(currRoot, currRoot->right);
+    }
+            
+    else if (currRoot->balance < -1)
+    {
+        format(currRoot, currRoot->left);
+    }
 }
-/*
-char* Tree::keyGen(const Site* s) const
+
+void Tree::format(Node* mom, Node* kid)
 {
-    //check if s exists?
-    char* ret[MAX_CHAR] = s->getTopic();
-    strcat(ret, s->getAddy());
-    return ret;
+    char kmom[MAX_CHAR],
+         kkid[MAX_CHAR],
+         kbabyL[MAX_CHAR];
+
+    kmom = mom->data->getKey();
+    kkid = kid->data->getKet();
+    kbaby= kid
 }
-*/
 
 //display entire tree contents
 void Tree::display() const
@@ -266,13 +282,13 @@ bool Tree::remove(Node *& currRoot, const char * key, Site& objectRemoved)
 void Tree:: deleteNode(Node *& aNode)
 {
 	if (!aNode->left && !aNode->right)
-	{
+	{   //deleting leaf
 		delete aNode->data;
 		delete aNode;
 		aNode = nullptr;
 	}
 	else if (!aNode->right)
-	{
+	{   //deleting parent of left child
 		Node * temp = aNode;
 		aNode = aNode->left;
 		delete temp->data;
@@ -280,7 +296,7 @@ void Tree:: deleteNode(Node *& aNode)
 		temp = nullptr;
 	}
 	else if (!aNode->left)
-	{
+	{   //deleting parent of right child
 		Node * temp = aNode;
 		aNode = aNode->right;
 		delete temp->data;
@@ -288,7 +304,7 @@ void Tree:: deleteNode(Node *& aNode)
 		temp = nullptr;
 	}
 	else
-	{ 
+	{   //deleting parent 
 		//find the inorder successor
 		Node * prev = nullptr;
 		Node * curr = aNode->right;
@@ -310,4 +326,53 @@ void Tree:: deleteNode(Node *& aNode)
 		}
 		delete curr;
 	}
+}
+
+/*
+void format()
+{
+    int format = heightComp(root);
+    if ( format == 0)
+        return;
+
+    if (format == 1)
+    {
+        //format right side
+    }
+
+    if (format == -1)
+    {
+        //format left side 
+    }
+}
+*/
+
+
+
+//checks if tree is balanced
+    // 1) rHeight > 1 + lHeight
+    // 0) tree is balanced  
+    //-1) lHeight > 1 + rHeight
+int heightComp(Node* root)
+{
+    int rHeight = height(root->right),
+        lHeight = height(root->left);
+    
+    if (rHeight > 1 + lHeight)
+        return 1;
+    
+    if (lHeight > 1 + rHeight)
+        return -1;
+    
+    else 
+        return 0;
+}
+//Returns total height from root
+int Tree::height(Node* root) const
+{
+	if(!root)
+		return 0;
+
+	int countL = height(root->left), countR = height(root->right);
+	return (countL > countR)? 1 + countL: 1 + countR;
 }

@@ -13,11 +13,11 @@ int main()
      * DONE 2. update init file to contian realistic websites
      * DONE 3. ask about the key and plan out what she wants
      * 4. intigrate key into remove and search functions
-     *         -how will higher up functions know what the key is?
-     *              -just use address as the key?
-     *
+     *         -pass Site pointer to tree. tree will pull key and search
+     *          via that:)
      * 5. Build tree reformatting function
-     * 5. build ui
+     * 6. build sheild class
+     * 7. build ui
      *
      *
      */ 
@@ -34,7 +34,7 @@ int main()
 	cout << "Tree size: " << t.getSize() << endl;
     
     Site s;
-    t.remove(
+    //t.remove(
     /*Old code. Inputs no longer valid
     
 	if (cs260.search("anna", match))
