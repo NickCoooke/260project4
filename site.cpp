@@ -11,7 +11,7 @@ Site::Site(){
 	char dSum[] = "no sum";
 	char dReview[] = "no review";
     char dTopic[] = "no topic";
-	init(dTopic, dAddy, dSum, dReview, dRating); 
+    init(dTopic, dAddy, dSum, dReview, dRating); 
 }
 
 //creates and populates site
@@ -36,8 +36,6 @@ void Site::init(const char* topic, const char* addy, const char* sum, const char
 	strcpy(this->review, review);
 	
     this->rating = rating;
-    
-    key = nullptr; 
     
     keyGen();     
 }
@@ -116,8 +114,13 @@ char* Site::getKey() const {
 
 //Private key generator. 
 void Site::keyGen()
-{
-    //generate key
+{ 
+    if(addy)
+        key = addy;
+    else
+        key = nullptr;
+    /*
+    //key = topic + addy
     char* ret = new char[MAX_CHAR];
     strcpy(ret, this->getTopic());
     strcat(ret, this->getAddy());
@@ -130,7 +133,7 @@ void Site::keyGen()
     }
     else
         key = ret;
-        
+    */  
 
 }
 
@@ -156,7 +159,8 @@ void Site::setReview(const char* review)
 ostream& operator<<(ostream& out, const Site* S) 
 {   
     
-    out << "Topic:    \t" << S->getTopic()  
+    out << "Key:      \t" << S->getKey()
+        << "\nTopic:    \t" << S->getTopic()  
         << "\nAddress:\t" << S->getAddy()
         << "\nSummary:\t" << S->getSum()
         << "\nReview: \t" << S->getReview()
@@ -170,19 +174,31 @@ ostream& operator<<(ostream& out, const Site* S)
 
 
 /*
-const Site& Site::operator=(const Site& s)
- { INCOMPLETE!!!
-     if (this == &s)
-         return *this;
-     this->setTopic(s.topic);
-     this->setAddy(s.addy);
-     this->setReview
-     return *this;
- }
-*/
+   const Site& Site::operator=(const Site& s)
+   { INCOMPLETE!!!
+   if (this == &s)
+   return *this;
+   this->setTopic(s.topic);
+   this->setAddy(s.addy);
+   this->setReview
+   return *this;
+   }
+   */
 
- bool Site::operator<(const Site& s) const
- {
-     return strcmp(this->getKey(), s.getKey()) < 0;
- }
+bool Site::operator>(const Site& s) const
+{
+    return strcmp(s.getKey(), key) < 0;
+}
+bool Site::operator<(const Site& s) const
+{
+    return strcmp(key, s.getKey()) < 0;
+}
+bool Site::operator!=(const Site& s) const
+{
+    if(strcmp(key, s.getKey()) == 0)
+        return false;
+    else 
+        return true;
+}
+
 

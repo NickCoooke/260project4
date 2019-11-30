@@ -3,7 +3,7 @@
 //Project 4, Fall 2019 lling cs260
 
 
-
+#include <algorithm> 
 #include "tree.h"
 #include "myutil.h"
 #include <fstream>
@@ -33,49 +33,6 @@ Tree::~Tree()
 
 
 
-//private member function that loads data from a file into tree
-bool Tree::readfile(const char* input_file)
-{
-    {
-
-        ifstream in;
-        in.open(input_file);
-        if (!in)
-            return false; // checks if file is open.
-
-        //now we read into our class....
-        Site* ptr;
-        char topic[MAX_CHAR];
-        char addy[MAX_CHAR];
-        char sum[MAX_CHAR];
-        char review[MAX_CHAR];
-        int rating;
-        in.get(topic, MAX_CHAR, ';');
-        while (!in.eof()) {
-            in.get();
-
-            in.get(addy, MAX_CHAR, ';');
-            in.get();
-            in.get(sum, MAX_CHAR, ';');
-            in.get();
-            in.get(review, MAX_CHAR, ';');
-            in.get();
-            in >> rating;
-
-            in.ignore(MAX_CHAR, '\n'); //moves to new line
-            
-            Site* ptr = new Site(topic, addy, sum, review, rating);
-            add(ptr);
-            in.get(topic, MAX_CHAR, ';');
-        }
-        in.close();
-        return true;
-    }
-
-
-}
-
-
 //helper function for destrucor. Recursively go through tree dealocating membory
 void Tree::destroy(Node *& currRoot)
 {
@@ -86,6 +43,131 @@ void Tree::destroy(Node *& currRoot)
 		delete currRoot->data;
 		delete currRoot;
 	}
+}
+
+
+
+//private member function that loads data from a file into tree
+bool Tree::readfile(const char* input_file)
+{
+    int size = fileLines(input_file);  
+    Site** input = new Site*[size];
+    //vector<Site> input;
+    //open file
+    ifstream in;
+    in.open(input_file);
+    if (!in)
+        return false; // checks if file is open.
+    
+    //Read into matches
+    Site* ptr;
+    char topic[MAX_CHAR];
+    char addy[MAX_CHAR];
+    char sum[MAX_CHAR];
+    char review[MAX_CHAR];
+    int rating;
+    
+    int i = 0;
+    in.get(topic, MAX_CHAR, ';');
+    while (!in.eof()) {
+        in.get();
+
+        in.get(addy, MAX_CHAR, ';');
+        in.get();
+        in.get(sum, MAX_CHAR, ';');
+        in.get();
+        in.get(review, MAX_CHAR, ';');
+        in.get();
+        in >> rating;
+
+        in.ignore(MAX_CHAR, '\n'); //moves to new line
+
+        Site* ptr = new Site(topic, addy, sum, review, rating);
+        
+        input[i] = ptr;
+        i++;
+        in.get(topic, MAX_CHAR, ';');
+    }
+    in.close();
+    
+    //sort array 
+    cout << "i:\t" << i << endl;
+    
+    sort(input, i);
+    
+    //add like binary search would
+    balanceAdd(input, 0, i-1);
+    
+    return true;
+}
+
+
+
+//private helper function for readfile
+//sorts site array 
+void Tree::sort(Site** arr, int n)
+{
+    for (int i = 0; i < n-1; i++)
+    {
+        // Last i elements are already in place   
+        for (int j = 0; j < n-i-1; j++) 
+        {
+            if (*(arr[j]) > *(arr[j+1]))
+                swap(arr[j], arr[j+1]);
+        }
+    }
+}
+
+
+
+//swaps element... coppied from #include <algorithm>
+template <class T> void swap ( T& a, T& b )
+{
+  T c(a); a=b; b=c;
+}
+
+
+
+//Private helper to read file
+//adds sorted array to binary tree to create balanced tree
+void Tree::balanceAdd(Site* arr[], int l, int r) 
+{ 
+    if (r >= l) 
+    { 
+        int mid = l + (r - l) / 2; 
+        
+        //how do we stop invalid add to max element??
+        add(arr[mid]);
+        
+        balanceAdd(arr, l, mid-1);
+        balanceAdd(arr, mid+1, r);
+    } 
+} 
+
+
+
+//counts the lines in input_file and returns the value
+//returns 0 for empty file and inaccessable file
+//use: this is so we can count the objects to be input and dynamacly allocate
+//an array to hold them for sorting purposes.
+int Tree::fileLines(const char* input_file) const
+{
+    ifstream in;
+    in.open(input_file);
+    if(in)
+    {
+        int size = 0;
+        char ch;
+        while (in.get(ch)) 
+        {
+            if (ch == '\n')
+                ++size;
+        }//__while
+        size--;
+        in.close();
+        return size;
+    }
+    return 0;
 }
 
 
@@ -117,35 +199,18 @@ void Tree::add(Node *& currRoot, Site * s)
 		add(currRoot->right, s);
         currRoot->balance++;
 	}
-
-    //Keeping tree balanced
-    if(currRoot->balance > 1)
-    {
-        format(currRoot, currRoot->right);
-    }
-            
-    else if (currRoot->balance < -1)
-    {
-        format(currRoot, currRoot->left);
-    }
 }
 
-void Tree::format(Node* mom, Node* kid)
-{
-    char kmom[MAX_CHAR],
-         kkid[MAX_CHAR],
-         kbabyL[MAX_CHAR];
 
-    kmom = mom->data->getKey();
-    kkid = kid->data->getKet();
-    kbaby= kid
-}
 
 //display entire tree contents
 void Tree::display() const
-{
-	cout << "In-order: " << endl;
-	displayInOrder(root);
+{   
+    if(root)
+    {
+	    cout << "In-order: " << endl;
+        displayInOrder(root);
+    }
 }
 
 
@@ -199,8 +264,9 @@ bool Tree::search(Node * currRoot, const char * key, Site& match) const
 		return false;
 	}
 
-	int temp = strcmp(key, currRoot->data->getTopic());
-	if (temp == 0)
+	int temp = strcmp(key, currRoot->data->getKey());
+
+    if (temp == 0)
 	{
 		match = *(currRoot->data);
 		return true;
@@ -220,7 +286,8 @@ bool Tree::search(Node * currRoot, const char * key, Site& match) const
 //Public call to search tree for topic matches, popopulate array matches, set size
 void Tree::searchByTopic(const char* topic, Site matches[], int& size) const
 {
-	searchByTopic(root, topic, matches, size);
+    //not efficient. use linked list or similar to store and size up with each result
+    searchByTopic(root, topic, matches, size);
 }
 
 
@@ -232,8 +299,9 @@ void Tree::searchByTopic(Node * currRoot, const char* topic,
 {
 	if (currRoot)
 	{
-		if (topic <= currRoot->data->getTopic())
-		{
+        int i = strcmp(topic, currRoot->data->getTopic());
+		if (i == 0)
+        {
 			matches[size] = *(currRoot->data);
 			size++;
 		}
@@ -258,7 +326,7 @@ bool Tree::remove(Node *& currRoot, const char * key, Site& objectRemoved)
 {
 	if (!currRoot)
 		return false;
-	int temp = strcmp(key, currRoot->data->getTopic());
+	int temp = strcmp(key, currRoot->data->getKey());
 	if (temp == 0)
 	{
 		objectRemoved = *(currRoot->data);
@@ -328,6 +396,21 @@ void Tree:: deleteNode(Node *& aNode)
 	}
 }
 
+int Tree::heightComp(Node* root) const
+{
+    int rHeight = height(root->right),
+        lHeight = height(root->left);
+    return lHeight - rHeight;    
+}
+//Returns total height from root
+int Tree::height(Node* root) const
+{
+	if(!root)
+		return 0;
+
+	int countL = height(root->left), countR = height(root->right);
+	return (countL > countR)? 1 + countL: 1 + countR;
+}
 /*
 void format()
 {
@@ -353,26 +436,6 @@ void format()
     // 1) rHeight > 1 + lHeight
     // 0) tree is balanced  
     //-1) lHeight > 1 + rHeight
-int heightComp(Node* root)
-{
-    int rHeight = height(root->right),
-        lHeight = height(root->left);
-    
-    if (rHeight > 1 + lHeight)
-        return 1;
-    
-    if (lHeight > 1 + rHeight)
-        return -1;
-    
-    else 
-        return 0;
-}
-//Returns total height from root
-int Tree::height(Node* root) const
-{
-	if(!root)
-		return 0;
 
-	int countL = height(root->left), countR = height(root->right);
-	return (countL > countR)? 1 + countL: 1 + countR;
-}
+
+/**/

@@ -25,6 +25,9 @@ class Site
         void    setReview(const char* review);
         friend	ostream& operator<<(ostream& out, const Site* S); 
         bool    operator< (const Site& s) const;
+        bool    operator> (const Site& s) const;
+        bool    operator!=(const Site& s) const;
+        int    operator-(const Site& s) const;
 
     private:
         char*   topic;

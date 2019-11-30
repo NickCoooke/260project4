@@ -1,8 +1,15 @@
 #ifndef TREE_H
 #define TREE_H
 #include "site.h"
+#include <vector>
+/*
+ *What am I doing?
+ 1) Sorting upon input: read file input into an array, sorted
+ 2) binary search that array and add elements to list
 
-
+ *
+ *
+ */
 
 class Tree
 {
@@ -21,7 +28,7 @@ class Tree
         int getSize() const;
 
     
-    
+   
     private:	
         struct Node
         {
@@ -37,34 +44,42 @@ class Tree
             int balance;
         };
 
-        //constructor/ destructor helper functions
+        //destructor helper functions
         void destroy(Node *& currRoot);
-        bool readfile(const char* input_file);
         
+        //constructor helper functions 
+        bool readfile(const char* input_file);
+        void binaryAdd(vector<Site> input);
+        void sort(Site** arr, int i);
+        int  fileLines(const char* input_file) const; 
+        void balanceAdd(Site* arr[], int l, int r); 
+
         //add helper functions
         void keyGen(const Site* s) const;
         void add(Node *& currRoot, Site * s);
     
-        //Display functions. Need soring 
-        void displayInOrder(Node * currRoot) const;
         
-        
-        void deleteNode(Node *& aNode);
-        //
-        int getSize(Node * currRoot) const;
-        bool search(Node * currRoot, const char * key, Site& match) const;
-        void searchByTopic(Node * currRoot, const char* topic, Site matches[], int& size) const;
         bool remove(Node *& currRoot, const char * key, Site& objectRemoved);
+        void deleteNode(Node *& aNode);
         
-        int heightComp() const; 
-                //0 = even, -1 = left is longer, 1 = right is longer
+        //Description functions
+        void displayInOrder(Node * currRoot) const;
+        int getSize(Node * currRoot) const;
         int height(Node* root) const;
-        //void format();
-                // checks to see if bst is well formatted. If not it fixes that
-        //void swap(Node* a, Node* b); 
-                //swap's a and b's positions
+        int heightComp(Node* root) const;
+     
+        //search functions
+        bool search(Node * currRoot, const char * key, Site& match) const;
+        void searchByTopic(Node * currRoot, const char* topic,
+                       Site matches[], int& size) const;
+
+        
         Node *	root;
         int		size;
+
+
+
+        //MEMBER GRAVEYARD
 
 };
 #endif

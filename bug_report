@@ -1,8 +1,16 @@
 This is a commit specific bug report and design decision writeup
 
-Leave off note:
-So. Imported height and created Node::balance. Now I a working on the algorithm
-to go throughout the tree and balance it. 
+
+BUG: Key is not initilized in all of my members. Nasa's key is 
+        not initilized
+        corrupted
+    causing a double free of corruption flag to be thrown 
+
+STORM:
+    Key is not being intilized in all elements
+    key is somehow corrupted throughout the program runtime
+
+-->Quearies: what specificly is causing it? GIVE ME THE LINE
 
 Design Decisions. 
 1) creating the key. THe key needed to be a unique value for each 

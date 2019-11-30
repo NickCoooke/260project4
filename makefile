@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-Wall -Wextra -g -c -std=c++11
+CFLAGS=-Wall -Wshadow -Wextra -g -c -std=c++11
 LDFLAGS=
 SOURCES=main.cpp tree.cpp site.cpp  
 OBJECTS=$(SOURCES:.cpp=.o)
