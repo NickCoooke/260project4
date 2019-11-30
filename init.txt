@@ -1,0 +1,11 @@
+fun;reddit.com;the eternal time sink;this site is dangerous!;4
+science;nasa.gov;space space is the place;pretty pictues. go here more!;5
+education;brilliant.org;suscription education platform;love this app;5
+mom;etsy.com;yummy capitalism;watch your wallet;4
+fun;youtube.com;videos. music. entertainment for days!;Watch the clock;4
+fun;freecodecamp.org;you's a nerd;learn that java nerd!;5
+poop;foxnews.com;internet vomit;absolute trash;1
+test;destroy.com;no;no;2
+test;destroy.com;no;no;2
+test;destroy.com;no;no;1
+
