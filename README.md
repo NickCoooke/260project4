@@ -1,7 +1,7 @@
-Bookmark Utility
+##Bookmark Utility##
 
-This project is designed to run on linux machines and via the 'make utility'.
-Bookmark utility holds url's, a description of its contents and a personal 
-review. This data is stored in a binary search tree.
+A utility designed and as a standalone storage and orginizational tool for 
+web addresses, and user input data describing those addresses. This Utility 
+is an orginizational tool for paper bibliographies and general web research
+orginization. 
 
-Project Status: Working but incomplete. 
