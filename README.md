@@ -1,5 +1,5 @@
 
-> This was an exersize I did in preporation for a notoriously hard Object oriented programming class. It implements a Binary Search [tree] which manages website [site] bookmarks and overloads the following operators: <, >, !=, <<. 
+> This was an exersize I did in preporation for a notoriously hard Object oriented programming class. It implements a Binary Search Tree which manages website bookmarks and overloads the following operators: <, >, !=, <<. 
 
  # Bookmark Utility
 
@@ -18,4 +18,5 @@ make
 # run the output
 ./a
 ```
-To test locally add function calls in main.cpp. 
+#### Test Locally 
+This is a commandline app and easiest to access via print(). Explore by adding calls in main.cpp and printing the output. In C++ projects classes and their methods are delcared in *.h files and implemented in *.cpp files, so if you're looking for what you can call the *.h files are a fantastic place to start! 

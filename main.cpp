@@ -1,4 +1,4 @@
-//main.cpp. This file is currently the testing base for project4.
+//main.cpp. This file is currently the testing base 
 
 #include "myutil.h"
 #include "site.h"
@@ -7,7 +7,7 @@
 int main()
 {
     /*Leave off notes.
-     * 4. intigrate key into remove and search functions
+     * 4. intigrate key into remove() and search()
      *         -pass Site pointer to tree. tree will pull key and search
      *          via that:)
      *          1) search by topic
@@ -33,7 +33,7 @@ int main()
     t->remove(input1, removed);
     
     char input2[] = "nasa.gov";
-    t->remove(input3, removed);
+    t->remove(input2, removed);
     
     char input3[] = "nasa.gov";
     t->remove(input3, removed);
